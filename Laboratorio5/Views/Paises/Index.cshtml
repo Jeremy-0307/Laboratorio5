@@ -1,0 +1,31 @@
+﻿@model List<Laboratorio5.Models.PaisModel>;
+
+@{
+  ViewData["Title"] = "Paises";
+}
+
+<h1>@ViewBag.MainTitle</h1>
+
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Continente</th>
+        <th>Idioma</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr>
+          <th>@item.Id</th>
+          <th>@item.Nombre</th>
+          <th>@item.Continente</th>
+          <th>@item.Idioma</th>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
