@@ -42,5 +42,43 @@ namespace Laboratorio5.Handlers
       }
       return paises;
     }
+    public bool CrearPais(PaisModel pais)
+    {
+      var consulta = @"INSERT INTO [dbo].[Pais] ([Nombre],[Idioma] ,[Continente])
+        VALUES(@Nombre, @Idioma, @Continente) ";
+      var comandoParaConsulta = new SqlCommand(consulta, conexion);
+      comandoParaConsulta.Parameters.AddWithValue("@Nombre", pais.Nombre);
+      comandoParaConsulta.Parameters.AddWithValue("@Idioma", pais.Idioma);
+      comandoParaConsulta.Parameters.AddWithValue("@Continente", pais.Continente);
+      conexion.Open();
+      bool exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
+      conexion.Close();
+      return exito;
+    }
+    public bool EditarPais(PaisModel pais)
+    {
+      var consulta = @"UPDATE [dbo].[Pais] SET Nombre = @Nombre, Idioma = @Idioma, Continente = @Continente, WHERE Id = @Id";
+      var comandoParaConsulta = new SqlCommand(consulta, conexion);
+      comandoParaConsulta.Parameters.AddWithValue("@Nombre", pais.Nombre);
+      comandoParaConsulta.Parameters.AddWithValue("@Idioma", pais.Idioma);
+      comandoParaConsulta.Parameters.AddWithValue("@Continente", pais.Continente);
+      comandoParaConsulta.Parameters.AddWithValue("@Id", pais.Id);
+      conexion.Open();
+      bool exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
+      conexion.Close();
+      return exito;
+    }
+
+    public bool BorrarPais(int id)
+    {
+      var consulta = @"Delete [dbo].[pais] where Id = @id";
+      var comandoParaConsulta = new SqlCommand(consulta, conexion);
+      comandoParaConsulta.Parameters.AddWithValue("@Id", id);
+      conexion.Open();
+      bool exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
+      conexion.Close();
+      return exito;
+    }
+
   }
 }

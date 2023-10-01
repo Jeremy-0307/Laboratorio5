@@ -7,6 +7,7 @@
 <h1>@ViewBag.MainTitle</h1>
 
 <div>
+  <a href="@Url.Action("CrearPais", "Paises")" class= "btn btn-success" >Crear Pais</a>
   <table class="table">
     <thead>
       <tr>
@@ -14,16 +15,24 @@
         <th>Nombre</th>
         <th>Continente</th>
         <th>Idioma</th>
+        <th>Editar</th>
+        <th>Borrar</th>
       </tr>
     </thead>
     <tbody>
       @foreach (var item in Model)
       {
         <tr>
-          <th>@item.Id</th>
-          <th>@item.Nombre</th>
-          <th>@item.Continente</th>
-          <th>@item.Idioma</th>
+          <td>@item.Id</td>
+          <td>@item.Nombre</td>
+          <td>@item.Idioma</td>
+          <td>@item.Continente</td>
+          <td>
+            @Html.ActionLink("Editar", "EditarPais", new { identificador = @item.Id },
+          new { @class = "btn btn alert-info", @onclick = "return confirm('¿Quiere editar este país?');" })</td>
+          <td>
+            @Html.ActionLink("Borrar", "BorrarPais", new { identificador = @item.Id },
+          new { @class = "btn btn alert-danger", @onclick = "return confirm('¿Quiere borrar este país?');" })</td>
         </tr>
       }
     </tbody>
